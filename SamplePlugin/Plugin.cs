@@ -8,7 +8,7 @@ namespace SamplePlugin
 {
     public sealed class Plugin : IDalamudPlugin
     {
-        public string Name => "Sample Plugin";
+        public string Name => "Is It Broke?";
 
         private const string commandName = "/pmycommand";
 
@@ -28,13 +28,13 @@ namespace SamplePlugin
             this.Configuration.Initialize(this.PluginInterface);
 
             // you might normally want to embed resources and load them from the manifest stream
-            var imagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
-            var goatImage = this.PluginInterface.UiBuilder.LoadImage(imagePath);
-            this.PluginUi = new PluginUI(this.Configuration, goatImage);
+            var imagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Gemstone-Dragon.JPG");
+            var dragonImage = this.PluginInterface.UiBuilder.LoadImage(imagePath);
+            this.PluginUi = new PluginUI(this.Configuration, dragonImage);
 
             this.CommandManager.AddHandler(commandName, new CommandInfo(OnCommand)
             {
-                HelpMessage = "A useful message to display in /xlhelp"
+                HelpMessage = "A maybe bit more usefull message letting me know the command is /pmycomand"
             });
 
             this.PluginInterface.UiBuilder.Draw += DrawUI;

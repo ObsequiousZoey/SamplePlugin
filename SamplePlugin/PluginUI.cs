@@ -10,7 +10,7 @@ namespace SamplePlugin
     {
         private Configuration configuration;
 
-        private ImGuiScene.TextureWrap goatImage;
+        private ImGuiScene.TextureWrap dragonImage;
 
         // this extra bool exists for ImGui, since you can't ref a property
         private bool visible = false;
@@ -28,15 +28,15 @@ namespace SamplePlugin
         }
 
         // passing in the image here just for simplicity
-        public PluginUI(Configuration configuration, ImGuiScene.TextureWrap goatImage)
+        public PluginUI(Configuration configuration, ImGuiScene.TextureWrap dragonImage)
         {
             this.configuration = configuration;
-            this.goatImage = goatImage;
+            this.dragonImage = dragonImage;
         }
 
         public void Dispose()
         {
-            this.goatImage.Dispose();
+            this.dragonImage.Dispose();
         }
 
         public void Draw()
@@ -59,11 +59,11 @@ namespace SamplePlugin
                 return;
             }
 
-            ImGui.SetNextWindowSize(new Vector2(375, 330), ImGuiCond.FirstUseEver);
-            ImGui.SetNextWindowSizeConstraints(new Vector2(375, 330), new Vector2(float.MaxValue, float.MaxValue));
-            if (ImGui.Begin("My Amazing Window", ref this.visible, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
+            ImGui.SetNextWindowSize(new Vector2(420, 420), ImGuiCond.FirstUseEver);
+            ImGui.SetNextWindowSizeConstraints(new Vector2(420, 420), new Vector2(float.MaxValue, float.MaxValue));
+            if (ImGui.Begin("Fuck it, Cute dragon", ref this.visible, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
             {
-                ImGui.Text($"The random config bool is {this.configuration.SomePropertyToBeSavedAndWithADefault}");
+                ImGui.Text($"The Dragon is cute: {this.configuration.SomePropertyToBeSavedAndWithADefault}");
 
                 if (ImGui.Button("Show Settings"))
                 {
@@ -72,9 +72,9 @@ namespace SamplePlugin
 
                 ImGui.Spacing();
 
-                ImGui.Text("Have a goat:");
+                ImGui.Text("Cute Dragon:");
                 ImGui.Indent(55);
-                ImGui.Image(this.goatImage.ImGuiHandle, new Vector2(this.goatImage.Width, this.goatImage.Height));
+                ImGui.Image(this.dragonImage.ImGuiHandle, new Vector2(this.dragonImage.Width, this.dragonImage.Height));
                 ImGui.Unindent(55);
             }
             ImGui.End();
@@ -93,7 +93,7 @@ namespace SamplePlugin
             {
                 // can't ref a property, so use a local copy
                 var configValue = this.configuration.SomePropertyToBeSavedAndWithADefault;
-                if (ImGui.Checkbox("Random Config Bool", ref configValue))
+                if (ImGui.Checkbox("Is the dragon cute", ref configValue))
                 {
                     this.configuration.SomePropertyToBeSavedAndWithADefault = configValue;
                     // can save immediately on change, if you don't want to provide a "Save and Close" button
